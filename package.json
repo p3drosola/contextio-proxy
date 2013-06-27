@@ -1,23 +1,34 @@
 {
-	"name": "contextio",
-	"description": "Official Node.js client library for the Context.IO Email API",
-	"keywords": ["email","ContextIO","api","imap","gmail","tools","rest"],
-	"version": "0.3.0",
-	"author": "Bruno Morency <bruno@context.io>",
-	"repository": {
-		"type": "git",
-		"url": "http://github.com/ContextIO/ContextIO-node.git"
-	},
-	"bugs": {
-		"url": "http://github.com/ContextIO/ContextIO-node/issues",
-		"email": "support@context.io"
-	},
-	"devDependencies": {
-		"vows": "0.6.x"
-	},
-	"main": "./lib/ContextIO",
-	"scripts": { "test": "vows test/*.js --spec" },
-	"engines": {
-		"node": ">= 0.4.12"
-	}
+  "name": "contextio-proxy",
+  "description": "Context.IO API proxy",
+  "keywords": [
+    "email",
+    "ContextIO",
+    "api",
+    "imap",
+    "gmail",
+    "tools",
+    "rest",
+    "proxy"
+  ],
+  "version": "0.0.1",
+  "author": "Pedro Solá <p3dro.sola@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/p3drosola/ContextIO-node.git"
+  },
+  "devDependencies": {
+    "vows": "0.6.x"
+  },
+  "main": "./proxy",
+  "scripts": {
+    "test": "vows test/*.js --spec"
+  },
+  "engines": {
+    "node": ">= 0.4.12"
+  },
+  "dependencies": {
+    "underscore": "~1.4.4",
+    "optimist": "~0.6.0"
+  }
 }
