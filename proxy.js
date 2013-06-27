@@ -1,12 +1,11 @@
 /**
- *  The following command likne options are available.
+ *  The following command line options are available.
  *
  *  key: your contextio key
  *  secret: your contextio secret
  *
  *  [port]: port on which to run the proxy. default: 8000
  */
-
 
 var ContextIO = require('./lib/ContextIO'),
     url = require('url'),
@@ -60,5 +59,4 @@ app.use(function(req, res){
   }
 });
 app.listen(port);
-
 console.log('ContextIO Proxy listening on port ', port);
