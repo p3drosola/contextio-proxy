@@ -9,8 +9,19 @@ It basically uses the offical [ContextIO-node](https://github.com/contextio/Cont
 ### Usage
 
 ```bash
+npm install
 node proxy.js --key 123abc --secret kad89ausd982d23
 ```
+
+And to test it run:
+
+```
+curl http://localhost:8000/accounts
+```
+
+Notice there's no need for the API version prefix.
+
+`GET`, `POST`, and `DELETE` requests work. I haven't tried anything else.
 
 That's it! Happy Hacking!
 

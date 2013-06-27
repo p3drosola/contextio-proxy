@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "underscore": "~1.4.4",
-    "optimist": "~0.6.0"
+    "optimist": "~0.6.0",
+    "connect": "~2.8.1"
   }
 }

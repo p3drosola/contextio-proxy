@@ -9,12 +9,13 @@
 
 
 var ContextIO = require('./lib/ContextIO'),
-    http = require('http'),
     url = require('url'),
     _ = require('underscore'),
     argv = require('optimist').argv,
+    connect = require('connect'),
     pass_headers = ['content-type', 'link', 'x-list-offset'],
     port = argv.port ? Number(argv.port) : 8000,
+    app = connect(),
     client;
 
 if (!_.isString(argv.key) || !_.isString(argv.secret)) {
@@ -36,23 +37,28 @@ function shouldProxy(req, res) {
   return true;
 }
 
-http.createServer(function (req, res) {
+app.use(connect.logger('dev'));
+app.use(connect.bodyParser());
+
+app.use(function(req, res){
   if (shouldProxy(req, res)) {
-    console.log('Got request: ', req.url);
-    var request_url = url.parse(req.url, true);
-    client.doCall(req.method, request_url.pathname.substr(1), request_url.query, function (error, contextio) {
+    console.log('Proxying request: ', req.url);
+    var parsed_url = url.parse(req.url, true),
+        path = parsed_url.pathname.substr(1),
+        params = req.method === 'POST' ? req.body : parsed_url.query;
+    client.doCall(req.method, path, params, function (error, contextio) {
       if (error) {
         console.error(error);
         res.writeHead(500);
         res.end('Something when wrong. Check the proxy\'s log.');
       } else {
-        console.log('  Response Code:', contextio.statusCode);
         var headers = _.pick(contextio.headers, pass_headers);
         res.writeHead(contextio.statusCode, headers);
         res.end(JSON.stringify(contextio.body));
       }
     });
   }
-}).listen(port);
+});
+app.listen(port);
 
 console.log('ContextIO Proxy listening on port ', port);
