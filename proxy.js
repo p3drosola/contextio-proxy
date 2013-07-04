@@ -52,6 +52,7 @@ app.use(function(req, res){
         res.end('Something when wrong. Check the proxy\'s log.');
       } else {
         var headers = _.pick(contextio.headers, pass_headers);
+        headers['Access-Control-Allow-Origin'] = '*';
         res.writeHead(contextio.statusCode, headers);
         res.end(JSON.stringify(contextio.body));
       }
